@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
+{% load static %} <!-- Carga estática aquí, solo necesitas hacerlo una vez por plantilla -->
 
 {% block content %}
-
-
 
 {% if user.is_authenticated %}
 
@@ -11,6 +10,7 @@
   <nav class="vertical-navbar">
     <div class="container">
       <ul>
+        <!-- Links de navegación para cada taller -->
         <li class="nav-item">
           <a class="nav-link" href="{% url 'estudiantes_por_taller' taller_id='A' %}">Taller A</a>
         </li>
@@ -96,65 +96,59 @@
 
 
 <div class="container">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        {% if query %}
-            {% for estudiante in estudiantes %}
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="{{ estudiante.image.url }}" class="card-img-top" alt="Estudiante Image">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="{% url 'record' estudiante.id %}">{{ estudiante.nombre }} {{ estudiante.apellido }}</a></h5>
-                            <p class="card-text"><strong>Cedula:</strong>{{ estudiante.cedula}}</p>
-                            <p class="card-text"><strong>Edad:</strong>{{ estudiante.edad}}</p>
-                        </div>
-                    </div>
-                </div>
-            {% empty %}
-                <div class="col">
-                    <p>No se encontraron resultados para "{{ query }}"</p>
-                </div>
-            {% endfor %}
-        {% else %}
-            {% for estudiante in Estudiante %}
-                <div class="col">
-                    <div class="card" style="width: 18rem;">
-                        <img src="{{ estudiante.image.url }}" class="card-img-top" alt="Estudiante Image">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="{% url 'record' estudiante.id %}">{{ estudiante.nombre }} {{ estudiante.apellido }}</a></h5>
-                            <p class="card-text"><strong>Cedula:</strong>{{ estudiante.cedula}}</p>
-                            <p class="card-text"><strong>Edad:</strong>{{ estudiante.edad}}</p>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        {% endif %}
-    </div>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+      {% if query %}
+          {% for estudiante in estudiantes %}
+              <div class="col">
+                  <div class="card" style="width: 18rem;">
+                    <img src="{% if estudiante.image %}{{ estudiante.image.url }}{% else %}{% static 'Fontan/Fontan-main/estudiantes/images/default.JPG' %}{% endif %}" class="card-img-top" alt="Imagen del estudiante">
+                    <div class="card-body">
+                          <h5 class="card-title"><a href="{% url 'record' estudiante.id %}">{{ estudiante.nombre }} {{ estudiante.apellido }}</a></h5>
+                          <p class="card-text"><strong>Cedula:</strong>{{ estudiante.cedula}}</p>
+                          <p class="card-text"><strong>Edad:</strong>{{ estudiante.edad}}</p>
+                      </div>
+                  </div>
+              </div>
+          {% empty %}
+              <div class="col">
+                  <p>No se encontraron resultados para "{{ query }}"</p>
+              </div>
+          {% endfor %}
+      {% else %}
+          {% for estudiante in Estudiante %}
+              <div class="col">
+                  <div class="card" style="width: 18rem;">
+                    <img src="{% if estudiante.image %}{{ estudiante.image.url }}{% else %}{% static 'Fontan/Fontan-main/estudiantes/images/default.JPG' %}{% endif %}" class="card-img-top" alt="Imagen del estudiante">
+                    <div class="card-body">
+                          <h5 class="card-title"><a href="{% url 'record' estudiante.id %}">{{ estudiante.nombre }} {{ estudiante.apellido }}</a></h5>
+                          <p class="card-text"><strong>Cedula:</strong>{{ estudiante.cedula}}</p>
+                          <p class="card-text"><strong>Edad:</strong>{{ estudiante.edad}}</p>
+                      </div>
+                  </div>
+              </div>
+          {% endfor %}
+      {% endif %}
+  </div>
 </div>
 
 {% else %}
 
-
-
 <div class="col-md-6 offset-md-3">
-<h1>Login</h1>
-<br/>
-
-<form method="POST" action="{% url 'home' %}">
-	{% csrf_token %}
-
-  <div class="mb-3">
-    <input type="text" class="form-control" name="username", placeholder="Username" required>
-    
-  </div><br/>
-  <div class="mb-3">
-    <input type="password" class="form-control" name="password", placeholder="Password" required>
-  </div>
+  <h1>Login</h1>
   <br/>
-  <button type="submit" class="btn btn-secondary">Login</button>
-
-</form>
-
-
+  <form method="POST" action="{% url 'home' %}">
+      {% csrf_token %}
+      <div class="mb-3">
+          <input type="text" class="form-control" name="username" placeholder="Username" required>
+      </div>
+      <br/>
+      <div class="mb-3">
+          <input type="password" class="form-control" name="password" placeholder="Password" required>
+      </div>
+      <br/>
+      <button type="submit" class="btn btn-secondary">Login</button>
+  </form>
+</div>
 
 {% endif %}
 
