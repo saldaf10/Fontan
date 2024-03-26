@@ -17,9 +17,15 @@ Including another URLconf
 # Archivo urls.py en la aplicación settings
 
 from django.contrib import admin
-from django.urls import path, include  # Asegúrate de importar include
+from django.urls import path, include  
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Doc_management.urls')),  # Incluye las URLs de la aplicación Doc_management
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  

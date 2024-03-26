@@ -2,7 +2,7 @@
 
 {% block content %}
 
-
+{% load static %}
 
 {% if user.is_authenticated %}
 
@@ -118,7 +118,7 @@
             {% for estudiante in Estudiante %}
                 <div class="col">
                     <div class="card" style="width: 18rem;">
-                        <img src="{{ estudiante.image.url }}" class="card-img-top" alt="Estudiante Image">
+                        <img src="{% if estudiante.image %}{{ estudiante.image.url }}{% else %}{% static 'estudiantes/images/DSC_1379.JPG' %}{% endif %}" class="card-img-top" alt="Imagen del estudiante">
                         <div class="card-body">
                             <h5 class="card-title"><a href="{% url 'record' estudiante.id %}">{{ estudiante.nombre }} {{ estudiante.apellido }}</a></h5>
                             <p class="card-text"><strong>Cedula:</strong>{{ estudiante.cedula}}</p>

@@ -14,7 +14,7 @@ class Estudiante(models.Model):
     apellido = models.CharField(max_length=15)
     taller = models.ForeignKey(Taller, on_delete=models.CASCADE)
     edad = models.CharField(max_length=10)
-    image = models.ImageField(upload_to='estudiantes/images/')
+    image = models.ImageField(upload_to='estudiantes/images/',blank=True, null=True, default='Doc_management\estudiantes\images\DSC_1379.JPG')
 
     def __str__(self):
         return f"{self.nombre} {self.apellido}"
