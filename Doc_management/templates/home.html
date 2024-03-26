@@ -2,13 +2,35 @@
 
 {% block content %}
 
+
 {% load static %}
 
-{% if user.is_authenticated %}
 
+<style>
+  .card {
+    width: 18rem; /* Ajusta el ancho de la tarjeta a tu preferencia */
+    height: auto; /* Altura automática para mantener la proporción, pero podrías fijar un mínimo */
+    display: flex;
+    flex-direction: column;
+  }
+  .card-img-top {
+    width: 100%; /* Hace que la imagen cubra el ancho de la tarjeta */
+    height: 15vw; /* Establece una altura fija o usa 'auto' si prefieres mantener la proporción */
+    object-fit: cover; /* Asegura que la imagen cubra el espacio asignado sin perder proporción */
+  }
+  .card-body {
+    flex-grow: 1; /* Hace que el cuerpo de la tarjeta ocupe el espacio restante, manteniendo los botones abajo */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+</style>
+
+{% if user.is_authenticated %}
 <div class="container-fluid">
   <!-- Barra lateral -->
   <nav class="vertical-navbar">
+    
     <div class="container">
       <ul>
         <li class="nav-item">
