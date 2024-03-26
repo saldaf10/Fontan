@@ -5,6 +5,19 @@
 
 {% if user.is_authenticated %}
 
+<style>
+  .card {
+      width: 18rem; /* Anchura fija para todas las tarjetas */
+      height: auto; /* Altura automática para mantener el contenido visible */
+      margin-bottom: 20px; /* Añade algo de espacio debajo de cada tarjeta */
+  }
+  .card-img-top {
+      width: 100%; /* Hace que la imagen cubra el ancho de la tarjeta */
+      height: 15vw; /* Altura fija para todas las imágenes */
+      object-fit: cover; /* Asegura que la imagen cubra el espacio asignado sin perder sus proporciones */
+  }
+</style>
+
 <div class="container-fluid">
   <!-- Barra lateral -->
   <nav class="vertical-navbar">
