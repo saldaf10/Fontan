@@ -143,8 +143,9 @@
                         <img src="{% if estudiante.image %}{{ estudiante.image.url }}{% else %}{% static 'estudiantes/images/DSC_1379.JPG' %}{% endif %}" class="card-img-top" alt="Imagen del estudiante">
                         <div class="card-body">
                             <h5 class="card-title"><a href="{% url 'record' estudiante.id %}">{{ estudiante.nombre }} {{ estudiante.apellido }}</a></h5>
-                            <p class="card-text"><strong>Cedula:</strong>{{ estudiante.cedula}}</p>
-                            <p class="card-text"><strong>Edad:</strong>{{ estudiante.edad}}</p>
+                            <p class="card-text"><strong>Cedula: </strong>{{ estudiante.cedula}}</p>
+                            <p class="card-text"><strong>Edad: </strong>{{ estudiante.edad}}</p>
+                            <p class="card-text"><strong>Taller: </strong>{{ estudiante.taller}}</p>
                         </div>
                     </div>
                 </div>
